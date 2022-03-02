@@ -1,13 +1,12 @@
-FROM python:3.9-slim-bullseye
+FROM anasty17/mltb:latest
+# FROM anasty17/mltb-oracle:latest
+
+WORKDIR /usr/src/app
+RUN chmod 777 /usr/src/app
+
+COPY requirements.txt .
+RUN pip3 install --no-cache-dir -r requirements.txt
 
 COPY . .
-RUN apt update -y && apt upgrade -y
-RUN apt install git -y
 
-# RUN pip3 install --no-cache-dir -r requirements.txt
-
-RUN cd /
-RUN mkdir /RBot
-WORKDIR /RBot
-COPY start.sh /start.sh
-CMD ["bash","/start.sh"]
+CMD ["bash", "start.sh"]
